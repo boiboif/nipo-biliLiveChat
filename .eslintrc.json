@@ -1,3 +1,14 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "no-unused-vars": "off",
+    "no-var": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }
+    ],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "@typescript-eslint/no-explicit-any": 0
+  }
 }

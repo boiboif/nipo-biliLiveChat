@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model comment {
+  originId            String
+  id                  Int      @id @default(autoincrement())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime
+  sendTime            DateTime @db.Timestamp(0)
+  content             String
+  uid                 Int
+  badge               Json?
+  identity            Json?
+  in_message_emoticon Json?
+  user                user     @relation(fields: [uid], references: [uid])
+
+  @@index([uid], map: "comment_uid_fkey")
+}
+
+model super_chat {
+  originId      String
+  id            Int    @id @default(autoincrement())
+  uid           Int
+  content       String
+  content_color String
+  price         Int
+  time          Int
+  user          user   @relation(fields: [uid], references: [uid])
+
+  @@index([uid], map: "super_chat_uid_fkey")
+}
+
+model user {
+  uid        Int          @id @unique
+  uname      String
+  comment    comment[]
+  super_chat super_chat[]
+}
