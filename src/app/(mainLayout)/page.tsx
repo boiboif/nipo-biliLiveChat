@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { DanmuListReqBody } from '../api/danmu/types'
 import dayjs from 'dayjs'
 import { Empty, Pagination, Spin, Tag } from 'antd'
+import bugImg from '@/assets/img/bug.jpg'
+import Image from 'next/image'
 
 export default function Home() {
   const [searchParams, setSearchParams] = useState<DanmuListReqBody>()
@@ -16,7 +18,7 @@ export default function Home() {
       ),
     {
       refreshDeps: [searchParams],
-      ready: !!searchParams?.uid,
+      // ready: !!searchParams?.uid,
     },
   )
 
@@ -35,15 +37,18 @@ export default function Home() {
                 {dayjs(item.sendTime).format('YYYY-MM-DD HH:mm:ss')}
               </div>
               <div className="flex">
-                <Tag
-                  className="flex !p-0"
-                  color={item.badge?.active ? item.badge?.color : '#ccc'}
-                >
-                  <div className="px-2">{item.badge?.name}</div>{' '}
-                  <div className="rounded-r bg-white px-1 text-slate-400">
-                    {item.badge?.level}
-                  </div>
-                </Tag>
+                {item.badge?.name && (
+                  <Tag
+                    className="flex !p-0"
+                    color={item.badge.active ? item.badge.color : '#ccc'}
+                  >
+                    <div className="px-2">{item.badge?.name}</div>{' '}
+                    <div className="rounded-r bg-white px-1 text-slate-400">
+                      {item.badge.level}
+                    </div>
+                  </Tag>
+                )}
+
                 {item.identity?.room_admin && <Tag color="pink">房</Tag>}
                 <div>{item.user.uname}:</div>
               </div>
@@ -52,18 +57,27 @@ export default function Home() {
           ))}
           {(!data?.list || data.list.length === 0) && (
             <Empty
+              image={
+                <Image
+                  priority
+                  className="inline-block"
+                  width={100}
+                  src={bugImg}
+                  alt=""
+                />
+              }
               description={<div className="dark:text-slate-400">暂无数据</div>}
               className="pt-20"
             />
           )}
         </Spin>
-
-        {data?.list && data.list.length > 0 && (
-          <div className="flex justify-center py-10">
-            <Pagination {...pagination} />
-          </div>
-        )}
       </div>
+
+      {data?.list && data.list.length > 0 && (
+        <div className="flex justify-center py-10">
+          <Pagination {...pagination} showTotal={(total) => `共 ${total} 条`} />
+        </div>
+      )}
     </div>
   )
 }

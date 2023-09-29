@@ -23,12 +23,12 @@ const ThemeSwitch = () => {
         if (theme === 'dark') {
           setTheme('light')
         }
-        if (theme === 'light') {
+        if (theme === 'light' || theme === 'system') {
           setTheme('dark')
         }
       }}
     >
-      {theme === 'light' && (
+      {(theme === 'light' || theme === 'system') && (
         <Image className="cursor-pointer" src={lightSvg} alt="" />
       )}
 

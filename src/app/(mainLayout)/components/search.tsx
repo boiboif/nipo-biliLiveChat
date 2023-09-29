@@ -18,7 +18,7 @@ const Search = (props: SearchProps) => {
       <Form.Item
         name="uid"
         rules={[
-          { required: true, message: '请输入uid' },
+          // { required: true, message: '请输入uid' },
           { pattern: /\d+/, message: '请输入正确的uid' },
         ]}
       >
