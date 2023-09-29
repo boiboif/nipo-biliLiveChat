@@ -9,6 +9,8 @@ export async function GET(request: NextRequest) {
   const uid = Number(searchParams.get('uid'))
 
   try {
+    if (size > 100) return res200(null, '每页条数最大为100条')
+
     const res = await prisma.comment.findMany({
       skip: (page - 1) * size,
       take: size,

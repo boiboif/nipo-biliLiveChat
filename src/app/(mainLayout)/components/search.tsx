@@ -1,5 +1,5 @@
 'use client'
-import { Form, Input } from 'antd'
+import { Form, Input, Grid } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
 type FormValue = { uid: number }
@@ -9,12 +9,16 @@ interface SearchProps {
   loading?: boolean
 }
 
+const { useBreakpoint } = Grid;
+
 const Search = (props: SearchProps) => {
   const { onSearch } = props
   const [form] = Form.useForm<FormValue>()
+  const { xs } = useBreakpoint()
+  
 
   return (
-    <Form form={form} className="max-w-md">
+    <Form form={form} className="max-w-md" size={xs ? 'middle' : 'large'}>
       <Form.Item
         name="uid"
         rules={[
@@ -24,7 +28,6 @@ const Search = (props: SearchProps) => {
       >
         <Input.Search
           placeholder="输入UID查询弹幕"
-          size="large"
           onSearch={async () => {
             const vals = await form.validateFields()
             onSearch(vals)

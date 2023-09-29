@@ -9,12 +9,12 @@ const codeMessage = {
 
 const createResponse =
   (code: keyof typeof codeMessage) =>
-  <T>(data?: T) => {
-    const msg = codeMessage[code]
+  <T>(data?: T, msg?: string) => {
+    const defalutMsg = codeMessage[code]
 
     return NextResponse.json({
       code,
-      msg,
+      msg: msg ?? defalutMsg,
       data,
     } as BaseResData<T>)
   }
