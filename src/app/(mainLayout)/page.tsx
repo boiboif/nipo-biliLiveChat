@@ -34,12 +34,10 @@ export default function Home() {
         <Spin spinning={loading}>
           {data?.list.map((item) => (
             <div
-              className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rose-50 py-3 text-xs last:mb-0 sm:flex-nowrap sm:text-base"
+              className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rose-50 py-3 text-xs last:mb-0 dark:border-gray-500 sm:flex-nowrap sm:text-base"
               key={item.id}
             >
-              <div>
-                {dayjs(item.sendTime).format('YYYY-MM-DD HH:mm:ss')}
-              </div>
+              <div>{dayjs(item.sendTime).format('YYYY-MM-DD HH:mm:ss')}</div>
               <div className="flex items-center">
                 {item.badge?.name && (
                   <Tag
@@ -82,6 +80,7 @@ export default function Home() {
       {data?.list && data.list.length > 0 && (
         <div className="flex justify-center py-10">
           <Pagination
+            className="text-xs sm:text-base"
             size={xs ? 'small' : 'default'}
             {...pagination}
             showTotal={(total) => `共 ${total} 条`}

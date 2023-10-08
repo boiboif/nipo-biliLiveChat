@@ -1,6 +1,6 @@
 'use client'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, theme as antdTheme } from 'antd'
 import { useTheme } from 'next-themes'
 import zhCN from 'antd/locale/zh_CN'
 import dayjs from 'dayjs'
@@ -23,23 +23,27 @@ const AntdProvider = (props: PropsWithChildren) => {
 
   useEffect(() => {
     if (theme === 'dark') {
+      // setProviderTheme((pre) => ({
+      //   ...pre,
+      //   components: {
+      //     Input: {
+      //       colorTextPlaceholder: 'rgb(148 163 184)',
+      //       colorText: '#fff',
+      //       colorBgContainer: 'rgba(120,131,155, 0.2)',
+      //       colorBorder: '#666',
+      //     },
+      //     Pagination: {
+      //       colorText: 'rgb(148 163 184)',
+      //       colorBgContainer: 'rgba(120,131,155, 0.2)',
+      //     },
+      //     Spin: {
+      //       colorBgContainer: 'transparent',
+      //     },
+      //   },
+      // }))
       setProviderTheme((pre) => ({
         ...pre,
-        components: {
-          Input: {
-            colorTextPlaceholder: 'rgb(148 163 184)',
-            colorText: '#fff',
-            colorBgContainer: 'rgba(120,131,155, 0.2)',
-            colorBorder: '#666',
-          },
-          Pagination: {
-            colorText: 'rgb(148 163 184)',
-            colorBgContainer: 'rgba(120,131,155, 0.2)'
-          },
-          Spin: {
-            colorBgContainer: 'transparent'
-          }
-        },
+        algorithm: antdTheme.darkAlgorithm,
       }))
     } else {
       setProviderTheme(defaultTheme)
