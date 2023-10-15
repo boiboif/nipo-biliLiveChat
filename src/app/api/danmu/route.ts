@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const page = Number(searchParams.get('page') ?? '1')
   const size = Number(searchParams.get('size') ?? '10')
-  const uid = Number(searchParams.get('uid'))
+  const uid = searchParams.get('uid')
 
   try {
     if (size > 100) return res200(null, '每页条数最大为100条')

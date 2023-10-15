@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model comment {
@@ -14,30 +15,31 @@ model comment {
   updatedAt           DateTime
   sendTime            DateTime @db.Timestamp(0)
   content             String
-  uid                 Int
+  uid                 String
   badge               Json?
   identity            Json?
   in_message_emoticon Json?
-  user                user     @relation(fields: [uid], references: [uid])
+  user                user     @relation(fields: [uid], references: [uid], onDelete: Cascade)
 
-  @@index([uid], map: "comment_uid_fkey")
+  @@index([uid])
 }
 
 model super_chat {
   originId      String
-  id            Int    @id @default(autoincrement())
-  uid           Int
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  uid           String
   content       String
   content_color String
   price         Int
   time          Int
-  user          user   @relation(fields: [uid], references: [uid])
+  user          user     @relation(fields: [uid], references: [uid], onDelete: Cascade)
 
-  @@index([uid], map: "super_chat_uid_fkey")
+  @@index([uid])
 }
 
 model user {
-  uid        Int          @id @unique
+  uid        String       @id @unique
   uname      String
   comment    comment[]
   super_chat super_chat[]
