@@ -7,9 +7,19 @@ import { DanmuListReqBody } from '../api/danmu/types'
 import dayjs from 'dayjs'
 import { Empty, Pagination, Spin, Tag, Grid } from 'antd'
 import bugImg from '@/assets/img/bug.jpg'
+import jianzhangImg from '@/assets/img/jianzhang.png@44w_44h.webp'
+import tiduImg from '@/assets/img/tidu.png@44w_44h.webp'
 import Image from 'next/image'
+import classNames from 'classnames'
 
 const { useBreakpoint } = Grid
+
+const guardImgMap = {
+  0: '',
+  1: '',
+  2: tiduImg,
+  3: jianzhangImg,
+}
 
 export default function Home() {
   const [searchParams, setSearchParams] = useState<DanmuListReqBody>()
@@ -41,10 +51,23 @@ export default function Home() {
               <div className="flex items-center">
                 {item.badge?.name && (
                   <Tag
-                    className="flex !p-0 text-xs sm:text-base"
+                    className={classNames([
+                      'relative flex !p-0 text-xs',
+                      {
+                        '!pl-3 sm:!pl-2': item.identity?.guard_level !== 0,
+                      },
+                    ])}
                     color={item.badge.active ? item.badge.color : '#ccc'}
                   >
-                    <div className="px-2">{item.badge?.name}</div>{' '}
+                    {item.identity && item.identity.guard_level !== 0 && (
+                      <Image
+                        className="absolute -left-2 top-1/2 -translate-y-1/2 sm:-left-3"
+                        width={24}
+                        src={guardImgMap[item.identity.guard_level]}
+                        alt=""
+                      />
+                    )}
+                    <div className="pl-[6px] pr-1">{item.badge?.name}</div>{' '}
                     <div className="rounded-r bg-white px-1 text-slate-400">
                       {item.badge.level}
                     </div>

@@ -9,7 +9,18 @@ import { AntdProvider, ThemeProvider } from '@/components'
 
 export const metadata: Metadata = {
   title: 'NipoChan直播弹幕查询',
+  applicationName: 'NipoChan直播弹幕查询',
   description: 'bilibili直播历史弹幕查询',
+  authors: [{ name: 'bbf', url: 'https://bbfbbf.cn' }],
+  keywords: [
+    'nipo',
+    'nipochan',
+    'bilibili',
+    '直播弹幕查询',
+    'bbf',
+    'b站',
+    '历史弹幕',
+  ],
 }
 
 export default function RootLayout({
