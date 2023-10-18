@@ -1,4 +1,6 @@
-[玲宮Nipo](https://space.bilibili.com/3494349161629839/) [bilibili直播](https://live.bilibili.com/30868374)弹幕查询前端
+# 玲宮Nipo [bilibili直播](https://live.bilibili.com/30868374)弹幕查询前端项目
+
+### 关注[玲宮Nipo](https://space.bilibili.com/3494349161629839/)谢谢喵！！！
 
 ## 技术栈
 next.js + antd + tailwind.css + prisma.js + mysql
