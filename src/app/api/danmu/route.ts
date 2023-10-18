@@ -6,10 +6,10 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const page = Number(searchParams.get('page') ?? '1')
   const size = Number(searchParams.get('size') ?? '10')
-  const uid = searchParams.get('uid')
+  const uid = searchParams.get('uid') ?? undefined
 
   try {
-    if (size > 100) return res200(null, '每页条数最大为100条')
+    if (size > 100) return res500(null, '每页条数最大为100条')
 
     const res = await prisma.comment.findMany({
       skip: (page - 1) * size,
@@ -17,13 +17,13 @@ export async function GET(request: NextRequest) {
       include: {
         user: true,
       },
-      ...(uid ? { where: { uid } } : null),
+      where: { uid },
       orderBy: {
         sendTime: 'desc',
       },
     })
     const total = await prisma.comment.count({
-      ...(uid ? { where: { uid } } : null),
+      where: { uid },
     })
     return res200({
       page,

@@ -19,6 +19,7 @@ const ThemeSwitch = () => {
 
   return (
     <div
+      className="cursor-pointer !bg-opacity-20 p-2 hover:bg-slate-300 dark:hover:bg-slate-500"
       onClick={() => {
         if (theme === 'dark') {
           setTheme('light')
@@ -28,13 +29,7 @@ const ThemeSwitch = () => {
         }
       }}
     >
-      {(theme === 'light' || theme === 'system') && (
-        <Image className="cursor-pointer" src={lightSvg} alt="" />
-      )}
-
-      {theme === 'dark' && (
-        <Image className="cursor-pointer" src={darkSvg} alt="" />
-      )}
+      <Image src={theme !== 'dark' ? lightSvg : darkSvg} alt="" />
     </div>
   )
 }

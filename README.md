@@ -7,6 +7,10 @@ next.js + antd + tailwind.css + prisma.js + mysql
 
 ## 本地开发
 
+```bash
+pnpm i 安装依赖
+```
+
 1. 首先在项目根目录创建一个 .env 环境变量文件
 - .env文件
 ```env
