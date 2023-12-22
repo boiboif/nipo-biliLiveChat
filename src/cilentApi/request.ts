@@ -26,9 +26,7 @@ message.config({
   duration: 3,
   maxCount: 1,
 })
-const service = axios.create({
-  withCredentials: false,
-})
+const service = axios.create()
 // request interceptor
 service.interceptors.request.use(
   (config) => {

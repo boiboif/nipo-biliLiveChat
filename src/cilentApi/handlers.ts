@@ -6,7 +6,4 @@ export const baseHandler = createHandler({
     code: res.code,
     msg: res.msg,
   }),
-  headers: () => ({
-    Authorization: 'Bearer ' + localStorage.getItem('access_token') ?? '',
-  }),
 })

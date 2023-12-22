@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import classNames from 'classnames'
 import StyledComponentsRegistry from '../lib/AntdRegistry'
 import { AntdProvider, ThemeProvider } from '@/components'
+import Script from 'next/script'
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -30,6 +31,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-1LQF2FWSPR"
+      ></Script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `  window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-1LQF2FWSPR');`,
+        }}
+      ></script>
+
       <body
         className={classNames([
           // inter.className,
